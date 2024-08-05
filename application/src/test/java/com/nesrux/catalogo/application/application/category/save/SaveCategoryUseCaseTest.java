@@ -63,6 +63,33 @@ public class SaveCategoryUseCaseTest extends UseCaseTest {
         Assertions.assertEquals(expectedErrorMessage, actualError.getErrors().get(0).message());
         Assertions.assertEquals(expectedErrorCount, actualError.getErrors().size());
 
-        verify(categoryGateway, times(1)).save(eq(aCategory))
+        verify(categoryGateway, times(0)).save(eq(aCategory))
+    }
+
+    @Test
+    public void givenInvalidID_whenCallSave_shouldReturnError() {
+        //given
+        final var expectedErrorMessage = "'id' should not be empty";
+        final var expectedErrorCount = 1;
+        final var aCategory =
+                Category.with(
+                        "",
+                        "Terror",
+                        "Conteudo gravado",
+                        true,
+                        InstantUtils.now(),
+                        InstantUtils.now(),
+                        null
+                );
+
+        //when
+        final var actualError = Assertions.assertThrows(DomainException.class,
+                () -> this.useCase.execute(aCategory));
+
+        //then
+        Assertions.assertEquals(expectedErrorMessage, actualError.getErrors().get(0).message());
+        Assertions.assertEquals(expectedErrorCount, actualError.getErrors().size());
+
+        verify(categoryGateway, times(0)).save(eq(aCategory))
     }
 }
