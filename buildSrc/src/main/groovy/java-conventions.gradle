@@ -28,17 +28,18 @@ jacoco{
 tasks.named("test"){
     useJUnitPlatform()
 }
-tasks.register('unitTests', Test) {
+task unitTests(type: Test, group: "verification") {
     useJUnitPlatform {
         includeTags("unitTest")
     }
 }
-tasks.register('integrationTests', Test) {
+task integrationTests(type: Test, group: "verification") {
     useJUnitPlatform {
         includeTags("integrationTest")
     }
 }
-tasks.register('e2eTests', Test) {
+
+task e2eTests(type: Test, group: "verification") {
     useJUnitPlatform {
         includeTags("e2eTest")
     }
