@@ -1,6 +1,7 @@
 package com.nesrux.catalogo.application.application.category.save;
 
 import com.nesrux.catalogo.application.application.UseCaseTest;
+import com.nesrux.catalogo.application.category.save.SaveCategoryUseCase;
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.category.Category;
 import com.nesrux.catalogo.domain.category.CategoryGateway;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.*;
 public class SaveCategoryUseCaseTest extends UseCaseTest {
 
     @InjectMocks
-    private SeveCategoryUseCase useCase;
+    private SaveCategoryUseCase useCase;
 
     @Mock
     private CategoryGateway categoryGateway;
@@ -63,7 +64,7 @@ public class SaveCategoryUseCaseTest extends UseCaseTest {
         Assertions.assertEquals(expectedErrorMessage, actualError.getErrors().get(0).message());
         Assertions.assertEquals(expectedErrorCount, actualError.getErrors().size());
 
-        verify(categoryGateway, times(0)).save(eq(aCategory))
+        verify(categoryGateway, times(0)).save(eq(aCategory));
     }
 
     @Test
@@ -90,6 +91,23 @@ public class SaveCategoryUseCaseTest extends UseCaseTest {
         Assertions.assertEquals(expectedErrorMessage, actualError.getErrors().get(0).message());
         Assertions.assertEquals(expectedErrorCount, actualError.getErrors().size());
 
-        verify(categoryGateway, times(0)).save(eq(aCategory))
+        verify(categoryGateway, times(0)).save(eq(aCategory));
+    }
+
+    @Test
+    public void givenNullCategory_whenCallSave_shouldReturnError() {
+        //given
+        final var expectedErrorMessage = "'aCategory' cannot be null'";
+        final var expectedErrorCount = 1;
+        final Category aCategory = null;
+        //when
+        final var actualError = Assertions.assertThrows(DomainException.class,
+                () -> this.useCase.execute(aCategory));
+
+        //then
+        Assertions.assertEquals(expectedErrorMessage, actualError.getErrors().get(0).message());
+        Assertions.assertEquals(expectedErrorCount, actualError.getErrors().size());
+
+        verify(categoryGateway, times(0)).save(eq(aCategory));
     }
 }
