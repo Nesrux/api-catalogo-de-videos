@@ -1,6 +1,7 @@
 package com.nesrux.catalogo.domain.category;
 
 
+import com.nesrux.catalogo.domain.validation.Error;
 import com.nesrux.catalogo.domain.validation.ValidationHandler;
 
 import java.time.Instant;
