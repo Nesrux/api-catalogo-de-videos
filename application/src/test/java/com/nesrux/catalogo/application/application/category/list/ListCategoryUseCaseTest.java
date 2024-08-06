@@ -1,6 +1,8 @@
 package com.nesrux.catalogo.application.application.category.list;
 
 import com.nesrux.catalogo.application.application.UseCaseTest;
+import com.nesrux.catalogo.application.category.list.ListCategoryOutput;
+import com.nesrux.catalogo.application.category.list.ListCategoryUseCase;
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.category.CategoryGateway;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
