@@ -40,7 +40,6 @@ public class ListCategoryUseCaseTest extends UseCaseTest {
         final var expectedDirection = "asc";
         final var expectedItemsCount = 2;
 
-
         final var aQuery =
                 new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
@@ -56,8 +55,8 @@ public class ListCategoryUseCaseTest extends UseCaseTest {
         //then
         Assertions.assertEquals(expectedPage, actualOutput.meta().currentPage());
         Assertions.assertEquals(expectedPerPage, actualOutput.meta().perPage());
-        Assertions.assertEquals(expectedItemsCount, actualOutput.meta().size());
-        Assertions.assertTrue(expectedItems.size() == actualOutput.data().size &&
+        Assertions.assertEquals(expectedItemsCount, actualOutput.meta().total());
+        Assertions.assertTrue(expectedItems.size() == actualOutput.data().size()&&
                 expectedItems.containsAll(actualOutput.data()));
     }
 }
