@@ -1,3 +1,5 @@
+graphql:
+  graphiql: true
 spring:
   autoconfigure:
     exclude:
