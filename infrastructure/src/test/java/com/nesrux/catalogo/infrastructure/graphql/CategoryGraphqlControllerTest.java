@@ -1,12 +1,14 @@
 package com.nesrux.catalogo.infrastructure.graphql;
 
+import com.nesrux.catalogo.domain.Fixture;
+import com.nesrux.catalogo.domain.category.CategorySearchQuery;
+import com.nesrux.catalogo.domain.pagination.Pagination;
 import com.nesrux.catalogo.infrastructure.GraphQLControllerTest;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryOutput;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryUseCase;
-import com.nesrux.catalogo.domain.Fixture;
-import com.nesrux.catalogo.domain.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.graphql.test.tester.GraphQlTester;
@@ -14,32 +16,38 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @GraphQLControllerTest(controllers = CategoryGraphQLController.class)
 public class CategoryGraphqlControllerTest {
     @MockBean
-    private ListCategoryUseCase useCase;
+    private ListCategoryUseCase listCategoryUseCase;
 
     @Autowired
     private GraphQlTester graphql;
 
 
     @Test
-    public void testListCategories() {
-        //given
-        final var expectedCategories =
-                List.of(
-                        ListCategoryOutput.from(Fixture.Categories.aulas()),
-                        ListCategoryOutput.from(Fixture.Categories.lives()));
+    public void givenDefaultParameters_whenCallsListCategories_shouldReturn() {
+        // given
+        final var expectedCategories = List.of(
+                ListCategoryOutput.from(Fixture.Categories.lives()),
+                ListCategoryOutput.from(Fixture.Categories.aulas())
+        );
 
-        final var expectedPage = 3;
+        final var expectedPage = 0;
         final var expectedPerPage = 10;
+        final var expectedSort = "name";
+        final var expectedDirection = "asc";
+        final var expectedSearch = "";
 
-
-        when(this.useCase.execute(any()))
+        when(this.listCategoryUseCase.execute(any()))
                 .thenReturn(new Pagination<>(
-                        expectedPage, expectedPerPage, expectedCategories.size(), expectedCategories));
+                        expectedPage,
+                        expectedPerPage,
+                        expectedCategories.size(),
+                        expectedCategories
+                ));
 
         final var query = """
                 {
@@ -49,14 +57,88 @@ public class CategoryGraphqlControllerTest {
                   }
                 }
                 """;
-        //when
+
+        // when
         final var res = this.graphql.document(query).execute();
+
         final var actualCategories = res.path("categories")
                 .entityList(ListCategoryOutput.class)
                 .get();
-        //then
-        Assertions.assertTrue(actualCategories.size() == expectedCategories.size()
-                && actualCategories.containsAll(expectedCategories));
 
+        // then
+        Assertions.assertTrue(
+                actualCategories.size() == expectedCategories.size()
+                        && actualCategories.containsAll(expectedCategories)
+        );
+
+        final var capturer = ArgumentCaptor.forClass(CategorySearchQuery.class);
+
+        verify(this.listCategoryUseCase, times(1)).execute(capturer.capture());
+
+        final var actualQuery = capturer.getValue();
+        Assertions.assertEquals(expectedPage, actualQuery.page());
+        Assertions.assertEquals(expectedPerPage, actualQuery.perPage());
+        Assertions.assertEquals(expectedSort, actualQuery.sort());
+        Assertions.assertEquals(expectedDirection, actualQuery.direction());
+        Assertions.assertEquals(expectedSearch, actualQuery.terms());
+
+    }
+
+    @Test
+    public void givenCustomArgumentsWhenCallsListCategoriesShouldReturn() {
+        // given
+        final var expectedCategories = List.of(
+                ListCategoryOutput.from(Fixture.Categories.lives()),
+                ListCategoryOutput.from(Fixture.Categories.aulas())
+        );
+
+        final var expectedPage = 2;
+        final var expectedPerPage = 15;
+        final var expectedSort = "id";
+        final var expectedDirection = "desc";
+        final var expectedSearch = "asd";
+
+        when(this.listCategoryUseCase.execute(any()))
+                .thenReturn(new Pagination<>(expectedPage, expectedPerPage, expectedCategories.size(), expectedCategories));
+
+        final var query = """
+                query AllCategories($search: String, $page: Int, $perPage: Int, $sort: String, $direction: String) {
+                                
+                  categories(search: $search, page: $page, perPage: $perPage, sort: $sort, direction: $direction) {
+                    id
+                    name
+                  }
+                }
+                """;
+
+        // when
+        final var res = this.graphql.document(query)
+                .variable("search", expectedSearch)
+                .variable("page", expectedPage)
+                .variable("perPage", expectedPerPage)
+                .variable("sort", expectedSort)
+                .variable("direction", expectedDirection)
+                .execute();
+
+        final var actualCategories = res.path("categories")
+                .entityList(ListCategoryOutput.class)
+                .get();
+
+        // then
+        Assertions.assertTrue(
+                actualCategories.size() == expectedCategories.size()
+                        && actualCategories.containsAll(expectedCategories)
+        );
+
+        final var capturer = ArgumentCaptor.forClass(CategorySearchQuery.class);
+
+        verify(this.listCategoryUseCase, times(1)).execute(capturer.capture());
+
+        final var actualQuery = capturer.getValue();
+        Assertions.assertEquals(expectedPage, actualQuery.page());
+        Assertions.assertEquals(expectedPerPage, actualQuery.perPage());
+        Assertions.assertEquals(expectedSort, actualQuery.sort());
+        Assertions.assertEquals(expectedDirection, actualQuery.direction());
+        Assertions.assertEquals(expectedSearch, actualQuery.terms());
     }
 }
