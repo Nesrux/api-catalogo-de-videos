@@ -1,10 +1,14 @@
 package com.nesrux.catalogo.infrastructure.graphql;
 
 
+import com.nesrux.catalogo.domain.category.Category;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryOutput;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryUseCase;
+import com.nesrux.catalogo.infrastructure.category.models.CategoryDto;
+import com.nesrux.catalogo.infrastructure.category.save.SaveCategoryUseCase;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -15,12 +19,14 @@ import java.util.Objects;
 public class CategoryGraphQLController {
 
     private final ListCategoryUseCase listCategoryUseCase;
+    private final SaveCategoryUseCase saveCategoryUseCase;
 
     public CategoryGraphQLController(
-            final ListCategoryUseCase listCategoryUseCase
+            final ListCategoryUseCase listCategoryUseCase,
+            final SaveCategoryUseCase saveCategoryUseCase
     ) {
         this.listCategoryUseCase = Objects.requireNonNull(listCategoryUseCase);
-
+        this.saveCategoryUseCase = Objects.requireNonNull(saveCategoryUseCase);
     }
 
     @QueryMapping
@@ -38,5 +44,11 @@ public class CategoryGraphQLController {
         return this.listCategoryUseCase.execute(aQuery).data();
     }
 
+    @MutationMapping
+    public Category saveCategory(@Argument final CategoryDto input) {
+        final var aCategory = input.toCategory();
+        this.saveCategoryUseCase.execute(aCategory);
+        return aCategory;
+    }
 
 }
