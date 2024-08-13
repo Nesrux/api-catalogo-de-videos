@@ -1,8 +1,12 @@
 {
-    // "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
     "[java]": {
         "editor.insertSpaces": false,
-        "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java",
+        "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java"
     },
-    "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java"
+    "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "[spring-boot-properties-yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

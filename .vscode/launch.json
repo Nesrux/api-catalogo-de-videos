@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Main<infrastructure>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.nesrux.catalogo.infrastructure.Main",
+            "projectName": "infrastructure",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,11 +1,15 @@
-keycloak:
-  realm: fc3-codeflix
-  host: http://localhost:8443
+elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
+    username: ${ELASTICSEARCH_USERNAME:elastic}
+    password: ${ELASTICSEARCH_PASSWORD:elastic}
 
+keycloak:
+    realm: fc3-codeflix
+    host: http://localhost:8443
 
 server:
-  port: 8080
-  undertow:
-    threads:
-      worker: 10
-      io: 2
+    port: 8080
+    undertow:
+        threads:
+            worker: 10
+            io: 2
