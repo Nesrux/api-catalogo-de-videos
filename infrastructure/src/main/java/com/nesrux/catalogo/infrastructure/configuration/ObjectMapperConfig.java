@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 @JsonComponent
 public class ObjectMapperConfig {
+
     @Bean
     public ObjectMapper mapper() {
         return Json.mapper();

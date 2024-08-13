@@ -44,6 +44,8 @@ bin/
 
 ### env files
 *.env
+## Node modules
+/node_modules
 
 #sandbox
 /sandbox/.docker

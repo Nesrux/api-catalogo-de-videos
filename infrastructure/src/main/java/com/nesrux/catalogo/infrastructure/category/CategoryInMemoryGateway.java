@@ -4,14 +4,14 @@ import com.nesrux.catalogo.domain.category.Category;
 import com.nesrux.catalogo.domain.category.CategoryGateway;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
 import com.nesrux.catalogo.domain.pagination.Pagination;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryInMemoryGateway implements CategoryGateway {
+
     private final ConcurrentHashMap<String, Category> db;
 
     public CategoryInMemoryGateway() {
@@ -38,9 +38,10 @@ public class CategoryInMemoryGateway implements CategoryGateway {
     public Pagination<Category> findAll(CategorySearchQuery aQuery) {
         final var values = this.db.values();
         return new Pagination<>(
-                aQuery.page(),
-                aQuery.perPage(),
-                values.size(),
-                new ArrayList<>(values));
+            aQuery.page(),
+            aQuery.perPage(),
+            values.size(),
+            new ArrayList<>(values)
+        );
     }
 }
