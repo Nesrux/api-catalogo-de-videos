@@ -1,5 +1,22 @@
 package com.nesrux.catalogo.infrastructure.graphql;
 
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.graphql.test.tester.GraphQlTester;
+
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.category.Category;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
@@ -10,20 +27,6 @@ import com.nesrux.catalogo.infrastructure.GraphQLControllerTest;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryOutput;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryUseCase;
 import com.nesrux.catalogo.infrastructure.category.save.SaveCategoryUseCase;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.graphql.test.tester.GraphQlTester;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.Mockito.*;
 
 @GraphQLControllerTest(controllers = CategoryGraphQLController.class)
 public class CategoryGraphqlControllerTest {
