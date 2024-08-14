@@ -1,15 +1,13 @@
 {
-    "tabWidth": 4,
-    "useTabs": false,
-    "singleQuote": true,
-    "printWidth": 100,
-    "overrides": [
-      {
-        "files": "*.java",
-        "options": {
-          "tabWidth": 2
-        }
-      }
-    ]
-  }
-  
+  "plugins": ["prettier-plugin-java"],
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "endOfLine": "lf"
+}

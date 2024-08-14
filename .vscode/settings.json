@@ -1,14 +1,20 @@
 {
-    "[java]": {
-        "editor.insertSpaces": false,
-        "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java"
-    },
-    "editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java",
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic",
-    "[spring-boot-properties-yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-    },
-    
-    "spring-boot.ls.problem.boot2.MISSING_CONFIGURATION_ANNOTATION": "IGNORE"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "automatic",
+
+  "spring-boot.ls.problem.boot2.MISSING_CONFIGURATION_ANNOTATION": "IGNORE",
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[java]": {
+    "editor.insertSpaces": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[spring-boot-properties-yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
