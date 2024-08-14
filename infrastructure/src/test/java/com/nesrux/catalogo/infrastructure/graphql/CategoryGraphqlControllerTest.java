@@ -173,9 +173,9 @@ public class CategoryGraphqlControllerTest {
                 "name", expectedName,
                 "description", expectedDescription,
                 "active", expectedActive,
-                "createdAt", expectedCreatedAt,
-                "updatedAt", expectedUpdatedAt,
-                "deletedAt", expectedDeletedAt
+                "createdAt", expectedCreatedAt.toString(),
+                "updatedAt", expectedUpdatedAt.toString(),
+                "deletedAt", expectedDeletedAt.toString()
         );
 
         final var query = """
