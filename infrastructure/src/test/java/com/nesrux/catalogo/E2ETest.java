@@ -1,4 +1,4 @@
-package com.nesrux.catalogo.infrastructure;
+package com.nesrux.catalogo;
 
 import com.nesrux.catalogo.infrastructure.configuration.WebServerConfig;
 import org.junit.jupiter.api.Tag;

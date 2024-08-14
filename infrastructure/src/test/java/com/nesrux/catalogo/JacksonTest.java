@@ -1,4 +1,4 @@
-package com.nesrux.catalogo.infrastructure;
+package com.nesrux.catalogo;
 
 import org.junit.jupiter.api.Tag;
 import org.springframework.test.context.ActiveProfiles;

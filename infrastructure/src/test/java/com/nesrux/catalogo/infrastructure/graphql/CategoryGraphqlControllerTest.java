@@ -17,13 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
+import com.nesrux.catalogo.GraphQLControllerTest;
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.category.Category;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
 import com.nesrux.catalogo.domain.pagination.Pagination;
 import com.nesrux.catalogo.domain.utils.IdUtils;
 import com.nesrux.catalogo.domain.utils.InstantUtils;
-import com.nesrux.catalogo.infrastructure.GraphQLControllerTest;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryOutput;
 import com.nesrux.catalogo.infrastructure.category.list.ListCategoryUseCase;
 import com.nesrux.catalogo.infrastructure.category.save.SaveCategoryUseCase;
