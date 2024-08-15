@@ -1,8 +1,9 @@
 package com.nesrux.catalogo;
 
-import com.nesrux.catalogo.infrastructure.category.CategoryRepository;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
+
+import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryRepository;
 
 public class IntegrationTestConfiguration {
 
