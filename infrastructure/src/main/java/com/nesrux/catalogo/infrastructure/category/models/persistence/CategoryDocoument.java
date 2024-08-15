@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.InnerField;
 import org.springframework.data.elasticsearch.annotations.MultiField;
 
+
 @Document(indexName = "categories")
 public class CategoryDocoument {
 
@@ -17,7 +18,7 @@ public class CategoryDocoument {
 
    @MultiField(
       mainField = @Field(type = FieldType.Text, name = "name"),
-      otherFields = @InnerField(suffix = ".keyword", type = FieldType.Keyword)
+      otherFields = @InnerField(suffix = "keyword", type = FieldType.Keyword)
    )
    private String name;
 
