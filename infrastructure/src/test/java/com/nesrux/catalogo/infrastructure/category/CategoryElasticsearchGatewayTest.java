@@ -11,7 +11,7 @@ import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryRe
 public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest {
 
    @Autowired
-   private CategoryElasticSearchGateway categoryGateway;
+   private CategoryElasticsearchGateway categoryGateway;
 
    @Autowired
    private CategoryRepository categoryRepository;
