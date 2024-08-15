@@ -15,23 +15,23 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @ActiveProfiles("test-integration")
 @ComponentScan(
-  basePackages = "com.nesrux.catalogo",
-  useDefaultFilters = false,
-  includeFilters = {
-    @ComponentScan.Filter(type = FilterType.REGEX, pattern = "*.ElasticsearchGateway"),
-  }
+   basePackages = "com.nesrux.catalogo",
+   useDefaultFilters = false,
+   includeFilters = {
+      @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*ElasticsearchGateway"),
+   }
 )
 @DataElasticsearchTest
 @ImportTestcontainers(ElasticSearchTestContainer.class)
-@Testcontainers
 @Tag("integrationTest")
+@Testcontainers
 public abstract class AbstractElasticSearchTest {
 
-  @Autowired
-  private Collection<ElasticsearchRepository<?, ?>> repositories;
+   @Autowired
+   private Collection<ElasticsearchRepository<?, ?>> repositories;
 
-  @BeforeEach
-  void cleanUp() {
-    this.repositories.forEach(ElasticsearchRepository::deleteAll);
-  }
+   @BeforeEach
+   void cleanUp() {
+      this.repositories.forEach(ElasticsearchRepository::deleteAll);
+   }
 }

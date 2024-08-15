@@ -1,15 +1,13 @@
 package com.nesrux.catalogo.infrastructure.category.models.persistence;
 
+import com.nesrux.catalogo.domain.category.Category;
 import java.time.Instant;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.InnerField;
 import org.springframework.data.elasticsearch.annotations.MultiField;
-
-import com.nesrux.catalogo.domain.category.Category;
 
 @Document(indexName = "categories")
 public class CategoryDocoument {
@@ -70,76 +68,73 @@ public class CategoryDocoument {
 
    public Category toCategory() {
       return Category.with(
-         id(),
-         name(),
-         description(),
+         getId(),
+         getName(),
+         getDescription(),
          isActive(),
-         createdAt(),
-         updatedAt(),
-         deletedAt()
+         getCreatedAt(),
+         getUpdatedAt(),
+         getDeletedAt()
       );
    }
 
-   public String id() {
+   public String getId() {
       return this.id;
    }
 
-   public CategoryDocoument id(String id) {
+   public void setId(String id) {
       this.id = id;
-      return this;
    }
 
-   public String name() {
+   public String getName() {
       return this.name;
    }
 
-   public CategoryDocoument name(String name) {
+   public void setName(String name) {
       this.name = name;
-      return this;
    }
 
-   public String description() {
+   public String getDescription() {
       return this.description;
    }
 
-   public CategoryDocoument description(String description) {
+   public void setDescription(String description) {
       this.description = description;
-      return this;
    }
 
    public boolean isActive() {
       return this.active;
    }
 
-   public CategoryDocoument active(boolean active) {
-      this.active = active;
-      return this;
+   public boolean getActive() {
+      return this.active;
    }
 
-   public Instant createdAt() {
+   public void setActive(boolean active) {
+      this.active = active;
+   }
+
+   public Instant getCreatedAt() {
       return this.createdAt;
    }
 
-   public CategoryDocoument createdAt(Instant createdAt) {
+   public void setCreatedAt(Instant createdAt) {
       this.createdAt = createdAt;
-      return this;
    }
 
-   public Instant updatedAt() {
+   public Instant getUpdatedAt() {
       return this.updatedAt;
    }
 
-   public CategoryDocoument updatedAt(Instant updatedAt) {
+   public void setUpdatedAt(Instant updatedAt) {
       this.updatedAt = updatedAt;
-      return this;
    }
 
-   public Instant deletedAt() {
+   public Instant getDeletedAt() {
       return this.deletedAt;
    }
 
-   public CategoryDocoument deletedAt(Instant deletedAt) {
+   public void setDeletedAt(Instant deletedAt) {
       this.deletedAt = deletedAt;
-      return this;
    }
 }
