@@ -3,6 +3,8 @@
   "java.compile.nullAnalysis.mode": "automatic",
 
   "spring-boot.ls.problem.boot2.MISSING_CONFIGURATION_ANNOTATION": "IGNORE",
+  "spring-boot.ls.problem.application-yaml.YAML_UNKNOWN_PROPERTY": "IGNORE",
+  "spring-boot.ls.problem.application-yaml.YAML_SHOULD_ESCAPE": "IGNORE",
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[java]": {
