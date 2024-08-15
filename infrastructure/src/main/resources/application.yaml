@@ -1,6 +1,6 @@
 elasticsearch:
-   connect-timeout: 250
-   socket-timeout: 1_000
+   connect-timeout: 15000
+   socket-timeout: 15000 # PS. ta muito alto pq meu pc é ruim, o ideal seria uns 1000 :D
 graphql:
    graphiql: false
 logging:

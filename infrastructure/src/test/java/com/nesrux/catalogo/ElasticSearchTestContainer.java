@@ -40,7 +40,7 @@ public interface ElasticSearchTestContainer {
         .forPort(9200)
         .forPath("/")
         .forStatusCode(200)
-        .withReadTimeout(Duration.of(5, TimeUnit.MINUTES.toChronoUnit()))
+        .withReadTimeout(Duration.of(10, TimeUnit.MINUTES.toChronoUnit()))
         .withBasicCredentials(CLUSTER_USER, CLUSTER_PWD)
         .allowInsecure();
     }
