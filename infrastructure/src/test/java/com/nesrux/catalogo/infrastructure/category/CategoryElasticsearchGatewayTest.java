@@ -34,12 +34,12 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       Assertions.assertEquals(aulas, actualOutput);
 
       final var actualCategory = categoryRepository.findById(actualOutput.id()).get();
-      Assertions.assertEquals(aulas.id(), actualCategory.getId());
-      Assertions.assertEquals(aulas.name(), actualCategory.getName());
-      Assertions.assertEquals(aulas.description(), actualCategory.getDescription());
-      Assertions.assertEquals(aulas.active(), actualCategory.isActive());
-      Assertions.assertEquals(aulas.createdAt(), actualCategory.getCreatedAt());
-      Assertions.assertEquals(aulas.updatedAt(), actualCategory.getUpdatedAt());
-      Assertions.assertEquals(aulas.deletedAt(), actualCategory.getDeletedAt());
+      Assertions.assertEquals(aulas.id(), actualCategory.id());
+      Assertions.assertEquals(aulas.name(), actualCategory.name());
+      Assertions.assertEquals(aulas.description(), actualCategory.description());
+      Assertions.assertEquals(aulas.active(), actualCategory.active());
+      Assertions.assertEquals(aulas.createdAt(), actualCategory.createdAt());
+      Assertions.assertEquals(aulas.updatedAt(), actualCategory.updatedAt());
+      Assertions.assertEquals(aulas.deletedAt(), actualCategory.deletedAt());
    }
 }
