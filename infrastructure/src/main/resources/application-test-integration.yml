@@ -1,8 +1,8 @@
 elasticsearch:
-   uris: http://localhost:9200
-   username: elastic
-   password: elastic
+  uris: http://localhost:9200
+  username: elastic
+  password: elastic
 
 keycloak:
-   realm: fc3-codeflix
-   host: http://localhost:8443
+  realm: test
+  host: http://test:8443

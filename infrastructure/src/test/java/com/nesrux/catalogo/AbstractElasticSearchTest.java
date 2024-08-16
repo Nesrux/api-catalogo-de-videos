@@ -1,7 +1,6 @@
 package com.nesrux.catalogo;
 
 import java.util.Collection;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
    }
 )
 @DataElasticsearchTest
-@ImportTestcontainers(ElasticSearchTestContainer.class)
+@ImportTestcontainers(ElasticsearchTestContainer.class)
 @Tag("integrationTest")
 @Testcontainers
 public abstract class AbstractElasticSearchTest {
