@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nesrux.catalogo.AbstractElasticSearchTest;
 import com.nesrux.catalogo.domain.Fixture;
+import com.nesrux.catalogo.domain.utils.IdUtils;
+import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryDocoument;
 import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryRepository;
 
 public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest {
@@ -41,5 +43,37 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       Assertions.assertEquals(aulas.createdAt(), actualCategory.createdAt());
       Assertions.assertEquals(aulas.updatedAt(), actualCategory.updatedAt());
       Assertions.assertEquals(aulas.deletedAt(), actualCategory.deletedAt());
+   }
+
+   @Test
+   public void givenAvalidId_whenCallsDeleteById_shouldBeOk() {
+      //given
+      final var aCategory = Fixture.Categories.aulas();
+      final var expectedId = aCategory.id();
+      final var expectedCount = 0;
+
+      categoryRepository.save(CategoryDocoument.from(aCategory));
+      Assertions.assertTrue(categoryRepository.existsById(expectedId));
+
+      //when
+      Assertions.assertDoesNotThrow(() -> categoryGateway.deleteById(expectedId));
+      //then
+      Assertions.assertEquals(expectedCount, categoryRepository.count());
+   }
+
+   @Test
+   public void givenAnIvalidId_whenCallsDeleteById_shouldBeOk() {
+      //given
+      final var aCategory = Fixture.Categories.aulas();
+      final var expectedId = IdUtils.randomUUID();
+      final var expectedCount = 1;
+
+      categoryRepository.save(CategoryDocoument.from(aCategory));
+      Assertions.assertTrue(categoryRepository.existsById(expectedId));
+
+      //when
+      Assertions.assertDoesNotThrow(() -> categoryGateway.deleteById(expectedId));
+      //then
+      Assertions.assertEquals(expectedCount, categoryRepository.count());
    }
 }
