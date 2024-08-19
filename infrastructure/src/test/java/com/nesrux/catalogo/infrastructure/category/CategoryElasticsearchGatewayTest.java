@@ -1,13 +1,14 @@
 package com.nesrux.catalogo.infrastructure.category;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nesrux.catalogo.AbstractElasticSearchTest;
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.utils.IdUtils;
 import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryDocoument;
 import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest {
 
@@ -74,5 +75,42 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       Assertions.assertDoesNotThrow(() -> categoryGateway.deleteById(expectedId));
       //then
       Assertions.assertEquals(expectedCount, categoryRepository.count());
+   }
+
+   @Test
+   public void givenAValidId_whenCallsfindById_shouldRetrivedIt() {
+      //given
+      final var aVideo = Fixture.Categories.aulas();
+      final var anId = aVideo.id();
+      final var expectedCount = 0;
+
+      categoryRepository.save(CategoryDocoument.from(aVideo));
+      Assertions.assertEquals(expectedCount, categoryRepository.count());
+      //when
+      final var actualOutput = categoryGateway.findById(anId).get();
+
+      //then
+      Assertions.assertNotNull(actualOutput);
+      Assertions.assertNotNull(actualOutput.id());
+      Assertions.assertEquals(aVideo.name(), actualOutput.name());
+      Assertions.assertEquals(aVideo.description(), actualOutput.description());
+      Assertions.assertEquals(aVideo.active(), actualOutput.active());
+      Assertions.assertEquals(aVideo.createdAt(), actualOutput.createdAt());
+      Assertions.assertEquals(aVideo.updatedAt(), actualOutput.updatedAt());
+      Assertions.assertEquals(aVideo.deletedAt(), actualOutput.deletedAt());
+   }
+
+   @Test
+   public void givenAnInvalidId_whenCallsFindById_shouldReturnEmpty() {
+      //given
+      final var aCategory = Fixture.Categories.lives();
+      final var anInvalidId = IdUtils.randomUUID();
+
+      categoryRepository.save(CategoryDocoument.from(aCategory));
+      //when
+      final var actualOutput = this.categoryGateway.findById(anInvalidId);
+
+      //then
+      Assertions.assertTrue(actualOutput.isEmpty());
    }
 }
