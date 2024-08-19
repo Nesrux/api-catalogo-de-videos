@@ -18,7 +18,6 @@ public class CategoryElasticsearchGateway implements CategoryGateway {
 
    private final CategoryRepository repository;
 
-
    public CategoryElasticsearchGateway(final CategoryRepository repository) {
       this.repository = Objects.requireNonNull(repository);
    }
@@ -37,8 +36,8 @@ public class CategoryElasticsearchGateway implements CategoryGateway {
    }
 
    @Override
-   public Optional<Category> findById(String anId) {
-      throw new UnsupportedOptionException();
+   public Optional<Category> findById(final String anId) {
+      return this.repository.findById(anId).map(CategoryDocoument::toCategory);
    }
 
    @Override
