@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.annotations.MultiField;
 import com.nesrux.catalogo.domain.category.Category;
 
 @Document(indexName = "categories")
-public class CategoryDocoument {
+public class CategoryDocument {
 
    @Id
    private String id;
@@ -38,7 +38,7 @@ public class CategoryDocoument {
    @Field(type = FieldType.Date, name = "deleted_at")
    private Instant deletedAt;
 
-   public CategoryDocoument(
+   public CategoryDocument(
       final String id,
       final String name,
       final String description,
@@ -56,8 +56,8 @@ public class CategoryDocoument {
       this.deletedAt = deletedAt;
    }
 
-   public static CategoryDocoument from(final Category aCategory) {
-      return new CategoryDocoument(
+   public static CategoryDocument from(final Category aCategory) {
+      return new CategoryDocument(
          aCategory.id(),
          aCategory.name(),
          aCategory.description(),
@@ -84,7 +84,7 @@ public class CategoryDocoument {
       return this.id;
    }
 
-   public CategoryDocoument id(String id) {
+   public CategoryDocument id(String id) {
       this.id = id;
       return this;
    }
@@ -93,7 +93,7 @@ public class CategoryDocoument {
       return this.name;
    }
 
-   public CategoryDocoument name(String name) {
+   public CategoryDocument name(String name) {
       this.name = name;
       return this;
    }
@@ -102,7 +102,7 @@ public class CategoryDocoument {
       return this.description;
    }
 
-   public CategoryDocoument description(String description) {
+   public CategoryDocument description(String description) {
       this.description = description;
       return this;
    }
@@ -111,7 +111,7 @@ public class CategoryDocoument {
       return this.active;
    }
 
-   public CategoryDocoument active(boolean active) {
+   public CategoryDocument active(boolean active) {
       this.active = active;
       return this;
    }
@@ -120,7 +120,7 @@ public class CategoryDocoument {
       return this.createdAt;
    }
 
-   public CategoryDocoument createdAt(Instant createdAt) {
+   public CategoryDocument createdAt(Instant createdAt) {
       this.createdAt = createdAt;
       return this;
    }
@@ -129,7 +129,7 @@ public class CategoryDocoument {
       return this.updatedAt;
    }
 
-   public CategoryDocoument updatedAt(Instant updatedAt) {
+   public CategoryDocument updatedAt(Instant updatedAt) {
       this.updatedAt = updatedAt;
       return this;
    }
@@ -138,7 +138,7 @@ public class CategoryDocoument {
       return this.deletedAt;
    }
 
-   public CategoryDocoument deletedAt(Instant deletedAt) {
+   public CategoryDocument deletedAt(Instant deletedAt) {
       this.deletedAt = deletedAt;
       return this;
    }

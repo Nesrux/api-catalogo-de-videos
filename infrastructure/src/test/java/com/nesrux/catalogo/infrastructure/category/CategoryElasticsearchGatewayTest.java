@@ -11,7 +11,7 @@ import com.nesrux.catalogo.AbstractElasticSearchTest;
 import com.nesrux.catalogo.domain.Fixture;
 import com.nesrux.catalogo.domain.category.CategorySearchQuery;
 import com.nesrux.catalogo.domain.utils.IdUtils;
-import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryDocoument;
+import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryDocument;
 import com.nesrux.catalogo.infrastructure.category.models.persistence.CategoryRepository;
 
 public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest {
@@ -56,7 +56,7 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       final var expectedId = aCategory.id();
       final var expectedCount = 0;
 
-      categoryRepository.save(CategoryDocoument.from(aCategory));
+      categoryRepository.save(CategoryDocument.from(aCategory));
       Assertions.assertTrue(categoryRepository.existsById(expectedId));
 
       //when
@@ -72,7 +72,7 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       final var expectedId = IdUtils.randomUUID();
       final var expectedCount = 1;
 
-      categoryRepository.save(CategoryDocoument.from(aCategory));
+      categoryRepository.save(CategoryDocument.from(aCategory));
       Assertions.assertTrue(categoryRepository.existsById(aCategory.id()));
 
       //when
@@ -87,7 +87,7 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       final var aVideo = Fixture.Categories.aulas();
       final var anId = aVideo.id();
 
-      categoryRepository.save(CategoryDocoument.from(aVideo));
+      categoryRepository.save(CategoryDocument.from(aVideo));
       //when
       final var actualOutput = categoryGateway.findById(anId).get();
 
@@ -108,7 +108,7 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
       final var aCategory = Fixture.Categories.lives();
       final var anInvalidId = IdUtils.randomUUID();
 
-      categoryRepository.save(CategoryDocoument.from(aCategory));
+      categoryRepository.save(CategoryDocument.from(aCategory));
       //when
       final var actualOutput = this.categoryGateway.findById(anInvalidId);
 
@@ -246,8 +246,8 @@ public class CategoryElasticsearchGatewayTest extends AbstractElasticSearchTest 
     }
 
     private void mockCategories() {
-        this.categoryRepository.save(CategoryDocoument.from(Fixture.Categories.aulas()));
-        this.categoryRepository.save(CategoryDocoument.from(Fixture.Categories.talks()));
-        this.categoryRepository.save(CategoryDocoument.from(Fixture.Categories.lives()));
+        this.categoryRepository.save(CategoryDocument.from(Fixture.Categories.aulas()));
+        this.categoryRepository.save(CategoryDocument.from(Fixture.Categories.talks()));
+        this.categoryRepository.save(CategoryDocument.from(Fixture.Categories.lives()));
     }
 }
